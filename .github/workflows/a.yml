@@ -2,7 +2,7 @@ name: A
 on:
   push:
     branches:
-      - "feature/add-workflows"
+      - "feature/update-trigger"
 
 jobs:
   output:
