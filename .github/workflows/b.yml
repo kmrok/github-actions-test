@@ -1,0 +1,13 @@
+name: B
+on:
+  pull_request:
+    branches:
+      - "develop"
+
+jobs:
+  output:
+    name: Output 'B'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo 'B'
