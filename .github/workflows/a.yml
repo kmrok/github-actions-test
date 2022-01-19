@@ -2,7 +2,7 @@ name: A
 on:
   push:
     branches:
-      - "feature/auto-pull-request"
+      - "feature/personal-access-token"
 
 permissions:
   pull-requests: write
@@ -18,12 +18,12 @@ jobs:
         uses: actions/github-script@v5
         continue-on-error: true
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           script: |
             github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `Auto Pull Request by GitHub Actions`,
-              head: "feature/auto-pull-request",
+              head: "feature/personal-access-token",
               base: "develop"
             })
