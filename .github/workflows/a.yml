@@ -2,7 +2,10 @@ name: A
 on:
   push:
     branches:
-      - "feature/update-trigger"
+      - "feature/auto-pull-request"
+
+permissions:
+  pull-requests: write
 
 jobs:
   output:
@@ -11,3 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: echo 'A'
+      - name: Create pull request
+        uses: actions/github-script@v5
+        continue-on-error: true
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Auto Pull Request by GitHub Actions`,
+              head: "feature/auto-pull-request",
+              base: "develop"
+            })
